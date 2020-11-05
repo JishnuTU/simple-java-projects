@@ -4,9 +4,13 @@ import com.ceit.expensetrackerapi.domains.User;
 import com.ceit.expensetrackerapi.exceptions.EAuthException;
 import com.ceit.expensetrackerapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.regex.Pattern;
 
+@Service
+@Transactional
 public class UserServiceImpl implements  UserService{
 
     @Autowired
