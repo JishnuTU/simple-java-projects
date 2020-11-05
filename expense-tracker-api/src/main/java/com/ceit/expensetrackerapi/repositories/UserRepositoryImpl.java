@@ -19,6 +19,8 @@ public class UserRepositoryImpl implements UserRepository {
     private static final String  SQL_FIND_BY_EMAIL = "SELECT USER_ID, FIRST_NAME,LAST_NAME," +
             "LAST_NAME,EMAIL, PASSWORD FROM ET_USERS WHERE EMAIL = ?";
 
+    private static final String SQL_CREATE = "INSERT INTO ET_USERS(USER_ID,FIRST_NAME," +
+            "LAST_NAME,EMAIL,PASSWORD VALUES (NEXTVAL('ET_USERS_SEQ'),?,?,?,?)";
     @Autowired
     JdbcTemplate jdbcTemplate;
 
