@@ -21,11 +21,11 @@ public class UserRepositoryImpl implements UserRepository {
     private static final String SQL_COUNT_BY_EMAIL = "SELECT COUNT(*) FROM " +
             "ET_USERS WHERE EMAIL= ?";
 
-    private static final String  SQL_FIND_BY_EMAIL = "SELECT USER_ID, FIRST_NAME,LAST_NAME," +
+    private static final String  SQL_FIND_BY_EMAIL = "SELECT USER_ID, FIRST_NAME," +
             "LAST_NAME,EMAIL, PASSWORD FROM ET_USERS WHERE EMAIL = ?";
 
     private static final String SQL_CREATE = "INSERT INTO ET_USERS(USER_ID,FIRST_NAME," +
-            "LAST_NAME,EMAIL,PASSWORD VALUES (NEXTVAL('ET_USERS_SEQ'),?,?,?,?)";
+            "LAST_NAME,EMAIL,PASSWORD) VALUES (NEXTVAL('ET_USERS_SEQ'),?,?,?,?)";
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -45,7 +45,7 @@ public class UserRepositoryImpl implements UserRepository {
             },keyHolder);
 
             return (Integer) keyHolder.getKeys().get("USER_ID");
-            
+
         }
         catch (Exception e){
          throw new EAuthException("Invalid Details , Failed to Create an Acoount");
@@ -74,7 +74,7 @@ public class UserRepositoryImpl implements UserRepository {
         return new User (
                 rs.getInt("USER_ID"),
                 rs.getString("FIRST_NAME"),
-                rs.getString("LASTNAME"),
+                rs.getString("LAST_NAME"),
                 rs.getString("EMAIL"),
                 rs.getString("PASSWORD")
                 );
