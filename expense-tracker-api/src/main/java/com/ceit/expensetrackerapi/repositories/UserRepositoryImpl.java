@@ -13,6 +13,12 @@ public class UserRepositoryImpl implements UserRepository {
     private static final String SQL_FIND_BY_ID = "SELECT user_id, first_name," +
             "last_name,email,password FROM et_users WHERE user_id = ?";
 
+    private static final String SQL_COUNT_BY_EMAIL = "SELECT COUNT(*) FROM " +
+            "ET_USERS WHERE EMAIL= ?";
+
+    private static final String  SQL_FIND_BY_EMAIL = "SELECT USER_ID, FIRST_NAME,LAST_NAME," +
+            "LAST_NAME,EMAIL, PASSWORD FROM ET_USERS WHERE EMAIL = ?";
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -28,7 +34,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Integer getCountByEmail(String email) {
-        return null;
+        return jdbcTemplate.queryForObject(SQL_COUNT_BY_EMAIL,
+                new Object[]{email},Integer.class);
     }
 
     @Override
