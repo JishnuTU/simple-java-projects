@@ -3,6 +3,7 @@ package com.ceit.expensetrackerapi.services;
 import com.ceit.expensetrackerapi.domains.User;
 import com.ceit.expensetrackerapi.exceptions.EAuthException;
 import com.ceit.expensetrackerapi.repositories.UserRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements  UserService{
             email = email.toLowerCase();
 
        User user  = userRepository.findByEmailAndPassword(email,password);
-        if(password.equals(user.getPassword()))
+        if(BCrypt.checkpw(password,user.getPassword()))
             return user;
         else
             throw  new EAuthException("Wrong Password");

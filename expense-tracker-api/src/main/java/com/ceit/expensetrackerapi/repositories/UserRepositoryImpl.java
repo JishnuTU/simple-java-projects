@@ -2,6 +2,7 @@ package com.ceit.expensetrackerapi.repositories;
 
 import com.ceit.expensetrackerapi.domains.User;
 import com.ceit.expensetrackerapi.exceptions.EAuthException;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,13 +36,14 @@ public class UserRepositoryImpl implements UserRepository {
     public Integer create(String firstName, String lastName, String email, String password) throws EAuthException {
         try{
             KeyHolder keyHolder = new GeneratedKeyHolder();
+            String hashedPassword = BCrypt.hashpw(password,BCrypt.gensalt(10));
             jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement(SQL_CREATE,
                         Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1,firstName);
                 ps.setString(2,lastName);
                 ps.setString(3,email);
-                ps.setString(4,password);
+                ps.setString(4,hashedPassword);
                 return ps;
             },keyHolder);
 
