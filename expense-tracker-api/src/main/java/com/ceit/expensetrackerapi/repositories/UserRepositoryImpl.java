@@ -3,6 +3,7 @@ package com.ceit.expensetrackerapi.repositories;
 import com.ceit.expensetrackerapi.domains.User;
 import com.ceit.expensetrackerapi.exceptions.EAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -54,7 +55,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findByEmailAndPassword(String email, String password) throws EAuthException {
-        return null;
+        try
+        {
+            User user = jdbcTemplate.queryForObject(SQL_FIND_BY_EMAIL,
+                    new Object[]{email},userRowMapper);
+            return user;
+        }
+        catch (EmptyResultDataAccessException e){
+            throw new EAuthException("Invalid Email/Password");
+        }
+
     }
 
     @Override

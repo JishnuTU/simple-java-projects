@@ -18,7 +18,15 @@ public class UserServiceImpl implements  UserService{
 
     @Override
     public User validateUser(String email, String password) throws EAuthException {
-        return null;
+
+        if(email!=null)
+            email = email.toLowerCase();
+
+       User user  = userRepository.findByEmailAndPassword(email,password);
+        if(password.equals(user.getPassword()))
+            return user;
+        else
+            throw  new EAuthException("Wrong Password");
     }
 
     @Override
