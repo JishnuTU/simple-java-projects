@@ -42,6 +42,8 @@ public class UserResource {
 
         Map<String,String> response = new HashMap<>();
 
+        userService.validateUser(email,password);
+
         response.put("Status","success");
         response.put("Email",email);
 
