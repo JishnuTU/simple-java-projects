@@ -38,7 +38,7 @@ public class AuthFilter extends GenericFilterBean {
                 }
                 catch(Exception e){
                     httpResponse.sendError(HttpStatus.FORBIDDEN.value(),
-                            "Invalid Token");
+                            "Invalid Token"+token);
                     return;
                 }
             }
