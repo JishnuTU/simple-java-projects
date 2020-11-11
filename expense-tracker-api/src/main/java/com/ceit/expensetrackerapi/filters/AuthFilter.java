@@ -31,14 +31,14 @@ public class AuthFilter extends GenericFilterBean {
 
                 try{
                     Claims claims = Jwts.parser().setSigningKey(Constants.API_SECRET_KEY)
-                            .parseClaimsJwt(token).getBody();
+                            .parseClaimsJws(token).getBody();
                     httpRequest.setAttribute("userId",
                             Integer.parseInt(claims.get("userId").toString())
                             );
                 }
                 catch(Exception e){
                     httpResponse.sendError(HttpStatus.FORBIDDEN.value(),
-                            "Invalid Token"+token);
+                            "Invalid Token ");
                     return;
                 }
             }
