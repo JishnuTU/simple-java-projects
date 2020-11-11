@@ -24,7 +24,7 @@ public class ExpenseTrackerApiApplication {
 		registrationBean.setFilter(authFilter);
 
 		registrationBean.addUrlPatterns("/api/categories");
-		
+
 		return registrationBean;
 
 	}
