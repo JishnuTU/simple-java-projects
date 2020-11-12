@@ -1,6 +1,7 @@
 package com.ceit.expensetrackerapi.repositories;
 
 import com.ceit.expensetrackerapi.domains.Category;
+import com.ceit.expensetrackerapi.exceptions.EtBadRequestException;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface CategoryRepository {
 
     Category findById(Integer userId, Integer categoryId)
             throws EtResourceNotFoundException;
-    
+
     List<Category> findAll(Integer userId)
         throws EtResourceNotFoundException;
 
