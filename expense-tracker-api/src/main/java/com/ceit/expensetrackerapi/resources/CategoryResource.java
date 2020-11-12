@@ -2,6 +2,8 @@ package com.ceit.expensetrackerapi.resources;
 
 
 import com.ceit.expensetrackerapi.domains.Category;
+import com.ceit.expensetrackerapi.services.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,10 @@ import java.util.Map;
 @RequestMapping("/api/categories")
 public class CategoryResource {
 
+    @Autowired
+    CategoryService categoryService;
+
+
     @PostMapping("")
     public ResponseEntity<Category> addCategory(HttpServletRequest request,
                                                 @RequestBody Map<String,Object> categoryMap
@@ -26,7 +32,8 @@ public class CategoryResource {
         String title = (String) categoryMap.get("title");
         String description = (String) categoryMap.get("description");
 
-        Category category = new Category(1,userId,title,description,0.0);
+        Category category = categoryService.addCategory(userId,
+                title,description);
 
         return new ResponseEntity<>(category, HttpStatus.CREATED);
 
