@@ -5,6 +5,7 @@ import com.ceit.expensetrackerapi.exceptions.EtBadRequestException;
 import com.ceit.expensetrackerapi.exceptions.EtResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -61,11 +62,28 @@ private static final String SQL_FIND_BY_ID = "SELECT C.category_id, C.user_id, C
 
     @Override
     public Category findById(Integer userId, Integer categoryId) throws EtResourceNotFoundException {
-        return null;
+        try{
+            return jdbcTemplate.queryForObject(SQL_FIND_BY_ID,
+                    new Object[]{userId,categoryId},
+                    categoryRowMapper);
+        }
+        catch(Exception e){
+            throw new EtResourceNotFoundException("Category Not found");
+        }
     }
 
     @Override
     public List<Category> findAll(Integer userId) throws EtResourceNotFoundException {
         return null;
     }
+
+    private RowMapper<Category> categoryRowMapper = ((rs,rowNum) ->{
+     return new Category(
+             rs.getInt("category_id"),
+             rs.getInt("user_id"),
+             rs.getString("title"),
+             rs.getString("description"),
+             rs.getDouble("total_expense")
+     );
+    });
 }
