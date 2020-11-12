@@ -20,6 +20,12 @@ public class CategoryRepositoryImpl implements  CategoryRepository{
             "(category_id,user_id,title,description) VALUES(" +
             "NEXTVAL('et_categories_seq'),?,?,?);";
 
+private static final String SQL_FIND_BY_ID = "SELECT C.category_id, C.user_id, C.title,C.description," +
+        "COALESCE(sum(T.amount),0) total_expense from" +
+        "et_transactions T right outer join et_categories C on" +
+        "(C.category_id = T.category_id)" +
+        "WHERE C.user_id = ? AND C.category_id =?" +
+        "GROUP BY C.category_id;";
     @Autowired
     JdbcTemplate jdbcTemplate;
 
