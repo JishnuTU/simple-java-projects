@@ -2,6 +2,7 @@ package com.ceit.expensetrackerapi.repositories;
 
 import com.ceit.expensetrackerapi.domains.Category;
 import com.ceit.expensetrackerapi.exceptions.EtBadRequestException;
+import com.ceit.expensetrackerapi.exceptions.EtResourceNotFoundException;
 
 import java.util.List;
 
