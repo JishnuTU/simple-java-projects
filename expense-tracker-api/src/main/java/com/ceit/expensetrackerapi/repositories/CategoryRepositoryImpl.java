@@ -22,7 +22,7 @@ public class CategoryRepositoryImpl implements  CategoryRepository{
             "NEXTVAL('et_categories_seq'),?,?,?);";
 
 private static final String SQL_FIND_BY_ID = "SELECT C.category_id, C.user_id, C.title,C.description," +
-        "COALESCE(sum(T.amount),0) total_expense from" +
+        "COALESCE(sum(T.amount),0) total_expense from " +
         "et_transactions T right outer join et_categories C on" +
         "(C.category_id = T.category_id)" +
         "WHERE C.user_id = ? AND C.category_id =?" +
@@ -63,6 +63,7 @@ private static final String SQL_FIND_BY_ID = "SELECT C.category_id, C.user_id, C
     @Override
     public Category findById(Integer userId, Integer categoryId) throws EtResourceNotFoundException {
         try{
+            
             return jdbcTemplate.queryForObject(SQL_FIND_BY_ID,
                     new Object[]{userId,categoryId},
                     categoryRowMapper);

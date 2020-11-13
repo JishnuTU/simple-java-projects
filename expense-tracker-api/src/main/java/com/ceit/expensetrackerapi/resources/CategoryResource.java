@@ -40,8 +40,7 @@ public class CategoryResource {
     public ResponseEntity<Category> getCategoryById(
             HttpServletRequest request, @PathVariable("category_id")
             Integer category_Id){
-
-        int userId = (Integer)request.getAttribute("userId");
+        int userId = (Integer) request.getAttribute("userId");
 
         Category category = categoryService.fetchCategoryById(
                 category_Id,userId);

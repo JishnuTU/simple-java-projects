@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "a2bb9915-e94a-4c23-abfc-3f692d50b191",
+		"name": "WebAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Harry\",\n    \"lastName\": \"Potter\",\n    \"email\": \"harry@gmail.com\",\n    \"password\": \"harry@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				},
+				"description": "                "
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"harry@gmail.com\",\n    \"password\": \"harry@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				},
+				"description": "            "
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDUxNTkyMDAsImV4cCI6MTYwNTE2NjQwMCwidXNlcklkIjo2LCJlbWFpbCI6ImhhcnJ5QGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IkhhcnJ5IiwibGFzdE5hbWUiOiJQb3R0ZXIifQ.WFLvakCe_JeL9-9CY0lTS6-tdHkNVZ1cw5TbdaagDdU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Shopping\",\n    \"description\": \"category for shopping\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
