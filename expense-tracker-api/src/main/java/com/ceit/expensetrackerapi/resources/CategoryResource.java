@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,4 +48,15 @@ public class CategoryResource {
 
         return new ResponseEntity<>(category,HttpStatus.OK);
     }
+
+    @GetMapping("")
+    public ResponseEntity<List<Category>>  getAllCategories
+            (HttpServletRequest request){
+        int userId = (Integer) request.getAttribute("userId");
+        List<Category> categories =
+                categoryService.fetchAllCategories(userId);
+        return new ResponseEntity<>(categories,HttpStatus.OK);
+
+    }
+
 }

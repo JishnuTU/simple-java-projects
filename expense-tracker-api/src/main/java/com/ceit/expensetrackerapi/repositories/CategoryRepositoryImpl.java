@@ -63,7 +63,7 @@ private static final String SQL_FIND_BY_ID = "SELECT C.category_id, C.user_id, C
     @Override
     public Category findById(Integer userId, Integer categoryId) throws EtResourceNotFoundException {
         try{
-            
+
             return jdbcTemplate.queryForObject(SQL_FIND_BY_ID,
                     new Object[]{userId,categoryId},
                     categoryRowMapper);
