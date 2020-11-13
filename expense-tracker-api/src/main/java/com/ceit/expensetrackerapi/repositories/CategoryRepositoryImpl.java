@@ -35,6 +35,10 @@ private static final String SQL_FIND_ALL = "SELECT C.category_id, C.user_id, C.t
         "WHERE C.user_id = ? " +
         "GROUP BY C.category_id;";
 
+private static final String SQL_UPDATE = "update et_categories " +
+        "set title = ? , description = ? " +
+        " where user_id = ? and category_id = ?;";
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -60,7 +64,17 @@ private static final String SQL_FIND_ALL = "SELECT C.category_id, C.user_id, C.t
 
     @Override
     public void update(Integer userId, Integer categoryId, Category category) throws EtBadRequestException {
-
+        try{
+            jdbcTemplate.update(SQL_UPDATE,new Object[]{
+                    category.getTitle(),
+                    category.getDescription(),
+                    userId,
+                    categoryId
+            });
+        }
+        catch (Exception e){
+            throw  new EtBadRequestException("Invalid Data");
+        }
     }
 
     @Override
