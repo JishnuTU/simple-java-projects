@@ -41,7 +41,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void updateCategory(Integer userId, Integer categoryId, Category category) throws EtBadRequestException {
-        categoryRepository.update(userId,categoryId,category);
+        Category oldCategory = categoryRepository.findById(userId,categoryId);
+        if(oldCategory!=null)
+            categoryRepository.update(userId,categoryId,category);
+        else
+            throw new EtResourceNotFoundException("Category not Found");
     }
 
     @Override
