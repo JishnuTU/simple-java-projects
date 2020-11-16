@@ -39,6 +39,12 @@ private static final String SQL_UPDATE = "update et_categories " +
         "set title = ? , description = ? " +
         " where user_id = ? and category_id = ?;";
 
+private  static final String SQL_DELETE_CATEGORY = "delete from et_categories where "+
+        " user_id = ? and category_id = ?";
+
+private  static final String SQL_DELETE_ALL_TRANSACTIONS = "delete from et_transactions " +
+        " where category_id = ?";
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -79,7 +85,13 @@ private static final String SQL_UPDATE = "update et_categories " +
 
     @Override
     public void removeById(Integer userId, Integer categoryId) {
+        this.removeAllCatTransactions(categoryId);
+        jdbcTemplate.update(SQL_DELETE_CATEGORY,new Object[]{userId,categoryId});
 
+    }
+
+    private void removeAllCatTransactions(Integer categoryId){
+    jdbcTemplate.update(SQL_DELETE_ALL_TRANSACTIONS,new Object[]{categoryId});
     }
 
     @Override
