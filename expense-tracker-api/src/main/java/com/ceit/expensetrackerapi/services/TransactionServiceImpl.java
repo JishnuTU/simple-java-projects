@@ -3,6 +3,8 @@ package com.ceit.expensetrackerapi.services;
 import com.ceit.expensetrackerapi.domains.Transaction;
 import com.ceit.expensetrackerapi.exceptions.EtBadRequestException;
 import com.ceit.expensetrackerapi.exceptions.EtResourceNotFoundException;
+import com.ceit.expensetrackerapi.repositories.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,8 @@ import java.util.List;
 @Service
 @Transactional
 public class TransactionServiceImpl implements TransactionService {
+    @Autowired
+    TransactionRepository transactionRepository;
     @Override
     public List<Transaction> fetchAllTransactions(Integer userId, Integer categoryId) {
         return null;
@@ -23,7 +27,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction addTransaction(Integer userId, Integer categoryId, Double amount, String note, Long TransactionDate) throws EtBadRequestException {
-        return null;
+        int transactionId = transactionRepository.create(userId,
+                categoryId,
+                amount, note,
+                TransactionDate);
+        return transactionRepository.findById(userId,categoryId,transactionId);
     }
 
     @Override
